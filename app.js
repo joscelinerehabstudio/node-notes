@@ -7,7 +7,26 @@ const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+// we can use .command to specify details of each command including whether
+// they are required to run the command and shortcuts to run them.
+const argv = yargs
+    // command with arguements
+    .command('add', 'add a note', {
+        title: {
+            describe: 'Title of note',
+            demand: true,
+            alias: 't'
+        },
+        body: {
+            describe: 'body of note',
+            demand: true,
+            alias: 'b'
+        },
+    })
+    // command without arguements
+    .command('list', 'list all notes')
+    .help()
+    .argv;
 let command = argv._[0];
 
 // console.log('Command: ', command);
