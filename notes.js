@@ -34,26 +34,28 @@ const addNote = (title, body) => {
 
 let getAll = () => {
     console.log('Getting notes');
-    notes.map((note) => {
-        console.log(`${note.title}: ${note.body}`);
-    });
+    notes = fetchNotes();
+
+    return notes;
 };
 
 let getItem = (title) => {
     console.log(`Getting ${title}`);
-    notes.map((note) => {
-        if (title === note.title) {
-            console.log(`${note.title}: ${note.body}`);
-        }
-    })
+    let notes = fetchNotes();
+
+    selectedNote = notes.filter((note) => note.title === title);
+
+    return selectedNote[0];
 }
 
 let remove = (title) => {
     console.log(`Removing ${title}`);
     let notes = fetchNotes();
 
-    notes = notes.filter((note) => note.title !== title);
-    saveNotes(notes);
+    filteredNotes = notes.filter((note) => note.title !== title);
+    saveNotes(filteredNotes);
+
+    return filteredNotes.length !== notes.length;
 }
 
 module.exports = {
